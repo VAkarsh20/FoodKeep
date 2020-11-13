@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/pantry"
+        android:title="Pantry"
+        android:icon="@drawable/ic_pantry"/>
+    <item
+        android:id="@+id/grocery"
+        android:title="Grocery"
+        android:icon="@drawable/ic_grocery"/>
+    <item
+        android:id="@+id/settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"/>
+</menu>
