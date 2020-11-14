@@ -5,10 +5,26 @@
     android:layout_height="match_parent"
     tools:context=".PantryFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Pantry" />
-
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Pantry" />
+        <TextView
+            android:id="@+id/pantry_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="" />
+        <Button
+            android:id="@+id/pantry_button"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Click" />
+    </LinearLayout>
 </FrameLayout>

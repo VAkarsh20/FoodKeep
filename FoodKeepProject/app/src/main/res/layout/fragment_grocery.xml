@@ -5,10 +5,27 @@
     android:layout_height="match_parent"
     tools:context=".GroceryFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Grocery" />
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Grocery" />
+        <TextView
+            android:id="@+id/grocery_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="" />
+        <Button
+            android:id="@+id/grocery_button"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Click" />
+    </LinearLayout>
 
 </FrameLayout>

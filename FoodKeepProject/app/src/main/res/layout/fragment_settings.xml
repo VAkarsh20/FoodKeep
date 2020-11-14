@@ -5,10 +5,27 @@
     android:layout_height="match_parent"
     tools:context=".SettingsFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Settings" />
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Settings" />
+        <TextView
+            android:id="@+id/settings_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="" />
+        <Button
+            android:id="@+id/settings_button"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Click" />
+    </LinearLayout>
 
 </FrameLayout>

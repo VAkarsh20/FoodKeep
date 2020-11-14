@@ -10,13 +10,14 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements GroceryFragment.GroceryListener, PantryFragment.PantryListener, SettingsFragment.SettingsListener {
 
     final PantryFragment pantryFragment = new PantryFragment();
     final GroceryFragment groceryFragment = new GroceryFragment();
     final SettingsFragment settingsFragment = new SettingsFragment();
     final FragmentManager fm = getSupportFragmentManager();
     private Fragment active = pantryFragment;
+    public int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,5 +49,31 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
         );
+    }
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        if (fragment instanceof GroceryFragment) {
+            GroceryFragment groceryFragment = (GroceryFragment) fragment;
+            groceryFragment.setGroceryListener(this);
+        }
+
+        if (fragment instanceof PantryFragment) {
+            PantryFragment pantryFragment = (PantryFragment) fragment;
+            pantryFragment.setPantryListener(this);
+        }
+
+        if (fragment instanceof SettingsFragment) {
+            SettingsFragment settingsFragment = (SettingsFragment) fragment;
+            settingsFragment.setSettingsListener(this);
+        }
+    }
+
+    @Override
+    public void onButtonClick() {
+        count++;
+        groceryFragment.updateCount(count);
+        pantryFragment.updateCount(count);
+        settingsFragment.updateCount(count);
     }
 }
