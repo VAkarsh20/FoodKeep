@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodKeepProject">
         <activity android:name=".PantryItemAddActivity"></activity>
+        <activity android:name=".GroceryItemAddActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
