@@ -6,18 +6,7 @@ public class GroceryItem {
 
     public GroceryItem(String name, int count) {
         this.name = name;
-        this.count = count;
     }
 
-    public void addCount(int add) {
-        count += add;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getCount() {
-        return count;
-    }
+    public String getName() { return name; }
 }

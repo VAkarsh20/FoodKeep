@@ -22,31 +22,31 @@
         app:layout_constraintRight_toRightOf="parent"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnLess"
-            android:layout_width="0sp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="-"
-            android:onClick="decrement" />
+<!--        <Button-->
+<!--            android:id="@+id/btnLess"-->
+<!--            android:layout_width="0sp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="-"-->
+<!--            android:onClick="decrement" />-->
 
-        <EditText
-            android:id="@+id/pickerNumber"
-            android:layout_width="0sp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:inputType="number"
-            android:digits="0123456789"
-            android:text="0" />
+<!--        <EditText-->
+<!--            android:id="@+id/pickerNumber"-->
+<!--            android:layout_width="0sp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:textAlignment="center"-->
+<!--            android:inputType="number"-->
+<!--            android:digits="0123456789"-->
+<!--            android:text="0" />-->
 
-        <Button
-            android:id="@+id/btnMore"
-            android:layout_width="0sp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="+"
-            android:onClick="increment" />
+<!--        <Button-->
+<!--            android:id="@+id/btnMore"-->
+<!--            android:layout_width="0sp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="+"-->
+<!--            android:onClick="increment" />-->
     </LinearLayout>
 
     <Button

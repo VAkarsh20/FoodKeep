@@ -26,36 +26,18 @@ public class GroceryItemAddActivity extends AppCompatActivity {
         textView.setAdapter(adapter);
     }
 
-    public void increment(View view) {
-        EditText count = (EditText) findViewById(R.id.pickerNumber);
-        int curCount = Integer.parseInt(count.getText().toString());
-        curCount += 1;
-        count.setText(String.valueOf(curCount));
-    }
-
-    public void decrement(View view) {
-        EditText count = (EditText) findViewById(R.id.pickerNumber);
-        int curCount = Integer.parseInt(count.getText().toString());
-        if (curCount > 0) {
-            curCount -= 1;
-            count.setText(String.valueOf(curCount));
-        }
-    }
-
     public void confirmAdd(View view) {
         AutoCompleteTextView name = (AutoCompleteTextView) findViewById(R.id.itemName);
         EditText count = (EditText) findViewById(R.id.pickerNumber);
         Intent resultIntent = new Intent();
 
         String nameString = name.getText().toString();
-        int countInt = Integer.parseInt(count.getText().toString());
 
-        if (nameString.equals("") || countInt == 0) {
+        if (nameString.equals("")) {
             setResult(RESULT_CANCELED);
             finish();
         }
         resultIntent.putExtra("name", toTitleCase(nameString));
-        resultIntent.putExtra("count", countInt);
         setResult(RESULT_OK, resultIntent);
         finish();
     }

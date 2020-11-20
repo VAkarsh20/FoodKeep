@@ -16,13 +16,11 @@ public class GroceryListAdapter extends RecyclerView.Adapter<GroceryListAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView itemName;
-        public TextView itemCount;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             itemName = (TextView) itemView.findViewById(R.id.groceryItemName);
-            itemCount = (TextView) itemView.findViewById(R.id.groceryItemCount);
         }
     }
 
@@ -47,8 +45,6 @@ public class GroceryListAdapter extends RecyclerView.Adapter<GroceryListAdapter.
 
         TextView textView = holder.itemName;
         textView.setText(item.getName());
-        textView = holder.itemCount;
-        textView.setText(item.getCount() + " in Grocery");
     }
 
     @Override
