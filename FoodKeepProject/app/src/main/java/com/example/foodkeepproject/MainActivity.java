@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity implements GroceryFragment.G
     private Fragment active = pantryFragment;
 
     private TextView headerText;
-    private ImageButton pantryTrash;
-    private ImageButton pantryTrashDone;
-    private boolean deleteMode = false;
+    private ImageButton pantryEnterConsume;
+    private ImageButton pantryExitConsume;
+    private boolean consumeMode = false;
 
     public int count = 0;
 
@@ -42,18 +42,18 @@ public class MainActivity extends AppCompatActivity implements GroceryFragment.G
         fm.beginTransaction().add(R.id.contentFrame, pantryFragment, "pantry").commit();
 
         headerText = (TextView) findViewById(R.id.headerTitle);
-        pantryTrash = (ImageButton) findViewById(R.id.pantryTrash);
-        pantryTrashDone = (ImageButton) findViewById(R.id.pantryTrashDone);
+        pantryEnterConsume = (ImageButton) findViewById(R.id.pantryEnterConsume);
+        pantryExitConsume = (ImageButton) findViewById(R.id.pantryExitConsume);
 
         BottomNavigationView nav = (BottomNavigationView) findViewById(R.id.navigationBar);
 
         nav.setOnNavigationItemSelectedListener(
                 item -> {
                     if (active == pantryFragment) {
-                        if (deleteMode) {
-                            pantryTrashDone.setVisibility(View.GONE);
+                        if (consumeMode) {
+                            pantryExitConsume.setVisibility(View.GONE);
                         } else {
-                            pantryTrash.setVisibility(View.GONE);
+                            pantryEnterConsume.setVisibility(View.GONE);
                         }
                     }
                     switch (item.getItemId()) {
@@ -62,10 +62,10 @@ public class MainActivity extends AppCompatActivity implements GroceryFragment.G
                             active = pantryFragment;
                             headerText.setText("Pantry");
 
-                            if (deleteMode) {
-                                pantryTrashDone.setVisibility(View.VISIBLE);
+                            if (consumeMode) {
+                                pantryExitConsume.setVisibility(View.VISIBLE);
                             } else {
-                                pantryTrash.setVisibility(View.VISIBLE);
+                                pantryEnterConsume.setVisibility(View.VISIBLE);
                             }
 
                             break;
@@ -103,18 +103,18 @@ public class MainActivity extends AppCompatActivity implements GroceryFragment.G
         }
     }
 
-    public void onPantryTrashClick(View view) {
-        pantryTrash.setVisibility(View.GONE);
-        deleteMode = true;
-        pantryFragment.enterDeleteMode();
-        pantryTrashDone.setVisibility(View.VISIBLE);
+    public void onPantryEnterConsumeClick(View view) {
+        pantryEnterConsume.setVisibility(View.GONE);
+        consumeMode = true;
+        pantryFragment.enterConsumeMode();
+        pantryExitConsume.setVisibility(View.VISIBLE);
     }
 
-    public void onPantryTrashDoneClick(View view) {
-        pantryTrash.setVisibility(View.VISIBLE);
-        deleteMode = false;
-        pantryFragment.exitDeleteMode();
-        pantryTrashDone.setVisibility(View.GONE);
+    public void onPantryExitConsumeClick(View view) {
+        pantryExitConsume.setVisibility(View.GONE);
+        consumeMode = false;
+        pantryFragment.exitConsumeMode();
+        pantryEnterConsume.setVisibility(View.VISIBLE);
     }
 
     @Override

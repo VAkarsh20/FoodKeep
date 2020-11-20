@@ -20,6 +20,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -31,6 +34,7 @@ import static android.app.Activity.RESULT_OK;
 public class PantryFragment extends Fragment {
 
     final int ADD_PANTRY_ITEM = 1;
+    final int CONSUME_PANTRY_ITEM = 2;
     ArrayList<PantryItem> pantryList;
     PantryListAdapter adapter;
     PantryListener callback;
@@ -59,12 +63,10 @@ public class PantryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_pantry, container, false);
 
         pantryList = new ArrayList<>();
-        pantryList.add(new PantryItem("Apple", 5));
-        pantryList.add(new PantryItem("Banana", 4));
+        pantryList.add(new PantryItem("Apple", 5, new GregorianCalendar(2020, Calendar.NOVEMBER, 22).getTime()));
+        pantryList.add(new PantryItem("Banana", 4, new GregorianCalendar(2020, Calendar.NOVEMBER, 22).getTime()));
 
-        PantryItemClickListener listener = (name) -> {
-            deleteItemPantryList(name);
-        };
+        PantryItemClickListener listener = this::consumeItem;
 
         RecyclerView pantryItemsList = (RecyclerView) view.findViewById(R.id.pantryList);
         adapter = new PantryListAdapter(pantryList, listener);
@@ -95,18 +97,34 @@ public class PantryFragment extends Fragment {
             if (resultCode == RESULT_OK) {
                 String itemName = data.getStringExtra("name");
                 int itemCount = data.getIntExtra("count", 0);
+                Date expiryDate = new Date(data.getLongExtra("expiryDate", 0));
 
                 int index = indexPantryList(itemName);
 
                 RecyclerView pantryListView = (RecyclerView) getView().findViewById(R.id.pantryList);
 
                 if (index != -1) {
-                    pantryList.get(index).addCount(itemCount);
+                    pantryList.get(index).addCount(itemCount, expiryDate);
                     adapter.notifyItemChanged(index);
                 } else {
-                    pantryList.add(0, new PantryItem(itemName, itemCount));
+                    pantryList.add(0, new PantryItem(itemName, itemCount, expiryDate));
                     adapter.notifyItemInserted(0);
                     pantryListView.scrollToPosition(0);
+                }
+            }
+        } else if (requestCode == CONSUME_PANTRY_ITEM) {
+            if (resultCode == RESULT_OK) {
+                String itemName = data.getStringExtra("name");
+                int itemCount = data.getIntExtra("count", 0);
+
+                int index = indexPantryList(itemName);
+                PantryItem item = pantryList.get(index);
+                if (item.consume(itemCount)) {
+                    pantryList.remove(index);
+                    adapter.notifyItemChanged(index);
+                    adapter.notifyItemRangeRemoved(index, 1);
+                } else {
+                    adapter.notifyItemChanged(index);
                 }
             }
         }
@@ -129,6 +147,15 @@ public class PantryFragment extends Fragment {
         adapter.notifyItemRangeRemoved(index, 1);
     }
 
+    private void consumeItem(String name) {
+        int index = indexPantryList(name);
+        PantryItem item = pantryList.get(index);
+        Intent intent = new Intent(getActivity(), ConsumeItemActivity.class);
+        intent.putExtra("ITEM_NAME", item.getName());
+        intent.putExtra("ITEM_COUNT", item.getCount());
+        startActivityForResult(intent, CONSUME_PANTRY_ITEM);
+    }
+
     public interface PantryListener {
         public void onButtonClick();
     }
@@ -137,18 +164,18 @@ public class PantryFragment extends Fragment {
         this.callback = callback;
     }
 
-    public void enterDeleteMode() {
+    public void enterConsumeMode() {
         fab.setVisibility(View.GONE);
         for (PantryItem item : pantryList) {
-            item.flipVisibility();
+            item.flipConsumeVisibility();
         }
         adapter.notifyDataSetChanged();
     }
 
-    public void exitDeleteMode() {
+    public void exitConsumeMode() {
         fab.setVisibility(View.VISIBLE);
         for (PantryItem item : pantryList) {
-            item.flipVisibility();
+            item.flipConsumeVisibility();
         }
         adapter.notifyDataSetChanged();
     }
