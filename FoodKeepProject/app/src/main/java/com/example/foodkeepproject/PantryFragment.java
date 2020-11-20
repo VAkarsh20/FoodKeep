@@ -13,8 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -31,6 +34,7 @@ public class PantryFragment extends Fragment {
     ArrayList<PantryItem> pantryList;
     PantryListAdapter adapter;
     PantryListener callback;
+    FloatingActionButton fab;
 
     public PantryFragment() {
         // Required empty public constructor
@@ -56,12 +60,18 @@ public class PantryFragment extends Fragment {
 
         pantryList = new ArrayList<>();
         pantryList.add(new PantryItem("Apple", 5));
+        pantryList.add(new PantryItem("Banana", 4));
+
+        PantryItemClickListener listener = (name) -> {
+            deleteItemPantryList(name);
+        };
+
         RecyclerView pantryItemsList = (RecyclerView) view.findViewById(R.id.pantryList);
-        adapter = new PantryListAdapter(pantryList);
+        adapter = new PantryListAdapter(pantryList, listener);
         pantryItemsList.setAdapter(adapter);
         pantryItemsList.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.addButton);
+        fab = (FloatingActionButton) view.findViewById(R.id.addButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,20 +86,6 @@ public class PantryFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        /*
-        MainActivity mainActivity = (MainActivity) getActivity();
-        View view = getView();
-
-        Button addButton = view.findViewById(R.id.addButton);
-
-        addButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), PantryItemAddActivity.class);
-                startActivityForResult(intent, ADD_PANTRY_ITEM);
-            }
-        });
-         */
     }
 
     @Override
@@ -126,12 +122,35 @@ public class PantryFragment extends Fragment {
         return -1;
     }
 
+    private void deleteItemPantryList(String name) {
+        int index = indexPantryList(name);
+        pantryList.remove(index);
+        adapter.notifyItemChanged(index);
+        adapter.notifyItemRangeRemoved(index, 1);
+    }
+
     public interface PantryListener {
         public void onButtonClick();
     }
 
     public void setPantryListener(PantryListener callback) {
         this.callback = callback;
+    }
+
+    public void enterDeleteMode() {
+        fab.setVisibility(View.GONE);
+        for (PantryItem item : pantryList) {
+            item.flipVisibility();
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    public void exitDeleteMode() {
+        fab.setVisibility(View.VISIBLE);
+        for (PantryItem item : pantryList) {
+            item.flipVisibility();
+        }
+        adapter.notifyDataSetChanged();
     }
 
     public void updateCount(int count) {

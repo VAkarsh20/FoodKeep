@@ -21,7 +21,10 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
 
-    <TextView
+    <Button
+        android:id="@+id/itemRemove"
+        android:text="Remove"
+        android:textAllCaps="false"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
