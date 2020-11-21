@@ -11,6 +11,7 @@
         android:theme="@style/Theme.FoodKeepProject">
         <activity android:name=".ConsumeItemActivity"></activity>
         <activity android:name=".PantryItemAddActivity" />
+        <activity android:name=".GroceryItemAddActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

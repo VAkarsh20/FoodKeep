@@ -51,6 +51,29 @@
             android:visibility="gone"
             android:onClick="onPantryExitConsumeClick"/>
 
+        <ImageButton
+            android:id="@+id/groceryEnterRemove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_consume"
+            app:layout_constraintEnd_toEndOf="@id/header"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            android:onClick="onGroceryEnterRemoveClick"/>
+
+        <ImageButton
+            android:id="@+id/groceryExitRemove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_check"
+            app:layout_constraintEnd_toEndOf="@id/header"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            android:visibility="gone"
+            android:onClick="onGroceryExitRemoveClick"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout

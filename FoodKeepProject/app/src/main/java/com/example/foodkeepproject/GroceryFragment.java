@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -28,9 +30,11 @@ import static android.app.Activity.RESULT_OK;
 public class GroceryFragment extends Fragment {
 
     final int ADD_GROCERY_ITEM = 1;
+    final int REMOVE_GROCERY_ITEM = 2;
     ArrayList<GroceryItem> groceryList;
     GroceryListAdapter adapter;
     GroceryListener callback;
+    FloatingActionButton fab;
 
     public GroceryFragment() {
         // Required empty public constructor
@@ -55,13 +59,16 @@ public class GroceryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_grocery, container, false);
 
         groceryList = new ArrayList<>();
-        groceryList.add(new GroceryItem("Apple", 5));
+        groceryList.add(new GroceryItem("Apple"));
+        groceryList.add(new GroceryItem("Banana"));
+        GroceryItemClickListener listener = this::removeItem; // TODO
+
         RecyclerView groceryItemsList = (RecyclerView) view.findViewById(R.id.groceryList);
-        adapter = new GroceryListAdapter(groceryList);
+        adapter = new GroceryListAdapter(groceryList, listener);
         groceryItemsList.setAdapter(adapter);
         groceryItemsList.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.addButton);
+        fab = (FloatingActionButton) view.findViewById(R.id.addButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,8 +92,6 @@ public class GroceryFragment extends Fragment {
         if (requestCode == ADD_GROCERY_ITEM) {
             if (resultCode == RESULT_OK) {
                 String itemName = data.getStringExtra("name");
-                int itemCount = data.getIntExtra("count", 0);
-
                 int index = indexGroceryList(itemName);
 
                 RecyclerView groceryListView = (RecyclerView) getView().findViewById(R.id.groceryList);
@@ -94,10 +99,21 @@ public class GroceryFragment extends Fragment {
                 if (index != -1) {
                     adapter.notifyItemChanged(index);
                 } else {
-                    groceryList.add(0, new GroceryItem(itemName, itemCount));
+                    groceryList.add(0, new GroceryItem(itemName));
                     adapter.notifyItemInserted(0);
                     groceryListView.scrollToPosition(0);
                 }
+            }
+        } else if (requestCode == REMOVE_GROCERY_ITEM) {
+            if (resultCode == RESULT_OK) {
+                String itemName = data.getStringExtra("name");
+
+                int index = indexGroceryList(itemName);
+                GroceryItem item = groceryList.get(index);
+
+                groceryList.remove(index);
+                adapter.notifyItemChanged(index);
+                adapter.notifyItemRangeRemoved(index, 1);
             }
         }
     }
@@ -112,12 +128,43 @@ public class GroceryFragment extends Fragment {
         return -1;
     }
 
+//    private void deleteItemGroceryList(String name) {
+//        int index = indexGroceryList(name);
+//        groceryList.remove(index);
+//        adapter.notifyItemChanged(index);
+//        adapter.notifyItemRangeRemoved(index, 1);
+//    }
+
+    private void removeItem(String name) {
+
+        int index = indexGroceryList(name);
+        groceryList.remove(index);
+        adapter.notifyItemChanged(index);
+        adapter.notifyItemRangeRemoved(index, 1);
+    }
+
     public interface GroceryListener {
         public void onButtonClick();
     }
 
     public void setGroceryListener(GroceryListener callback) {
         this.callback = callback;
+    }
+
+    public void enterRemoveMode() {
+        fab.setVisibility(View.GONE);
+        for (GroceryItem item : groceryList) {
+            item.flipRemoveVisibility();
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    public void exitRemoveMode() {
+        fab.setVisibility(View.VISIBLE);
+        for (GroceryItem item : groceryList) {
+            item.flipRemoveVisibility();
+        }
+        adapter.notifyDataSetChanged();
     }
 
     public void updateCount(int count) {

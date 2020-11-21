@@ -28,7 +28,12 @@ public class MainActivity extends AppCompatActivity implements GroceryFragment.G
     private TextView headerText;
     private ImageButton pantryEnterConsume;
     private ImageButton pantryExitConsume;
+
+    private ImageButton groceryEnterRemove;
+    private ImageButton groceryExitRemove;
+
     private boolean consumeMode = false;
+    private boolean removeMode = false;
 
     public int count = 0;
 
@@ -45,6 +50,9 @@ public class MainActivity extends AppCompatActivity implements GroceryFragment.G
         pantryEnterConsume = (ImageButton) findViewById(R.id.pantryEnterConsume);
         pantryExitConsume = (ImageButton) findViewById(R.id.pantryExitConsume);
 
+        groceryEnterRemove = (ImageButton) findViewById(R.id.groceryEnterRemove);
+        groceryExitRemove = (ImageButton) findViewById(R.id.groceryExitRemove);
+
         BottomNavigationView nav = (BottomNavigationView) findViewById(R.id.navigationBar);
 
         nav.setOnNavigationItemSelectedListener(
@@ -54,6 +62,12 @@ public class MainActivity extends AppCompatActivity implements GroceryFragment.G
                             pantryExitConsume.setVisibility(View.GONE);
                         } else {
                             pantryEnterConsume.setVisibility(View.GONE);
+                        }
+                    } else if (active == groceryFragment) {
+                        if (removeMode) {
+                            groceryExitRemove.setVisibility(View.GONE);
+                        } else {
+                            groceryEnterRemove.setVisibility(View.GONE);
                         }
                     }
                     switch (item.getItemId()) {
@@ -73,6 +87,13 @@ public class MainActivity extends AppCompatActivity implements GroceryFragment.G
                             fm.beginTransaction().hide(active).show(groceryFragment).commit();
                             active = groceryFragment;
                             headerText.setText("Grocery List");
+
+                            if (removeMode) {
+                                groceryExitRemove.setVisibility(View.VISIBLE);
+                            } else {
+                                groceryEnterRemove.setVisibility(View.VISIBLE);
+                            }
+
                             break;
                         case R.id.settings:
                             fm.beginTransaction().hide(active).show(settingsFragment).commit();
@@ -115,6 +136,20 @@ public class MainActivity extends AppCompatActivity implements GroceryFragment.G
         consumeMode = false;
         pantryFragment.exitConsumeMode();
         pantryEnterConsume.setVisibility(View.VISIBLE);
+    }
+
+    public void onGroceryEnterRemoveClick(View view) {
+        groceryEnterRemove.setVisibility(View.GONE);
+        removeMode = true;
+        groceryFragment.enterRemoveMode();
+        groceryExitRemove.setVisibility(View.VISIBLE);
+    }
+
+    public void onGroceryExitRemoveClick(View view) {
+        groceryExitRemove.setVisibility(View.GONE);
+        removeMode = false;
+        groceryFragment.exitRemoveMode();
+        groceryEnterRemove.setVisibility(View.VISIBLE);
     }
 
     @Override
