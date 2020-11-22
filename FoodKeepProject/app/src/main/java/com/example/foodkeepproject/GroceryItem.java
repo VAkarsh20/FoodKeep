@@ -1,6 +1,8 @@
 package com.example.foodkeepproject;
 
-public class GroceryItem {
+import java.io.Serializable;
+
+public class GroceryItem implements Serializable {
     private String name;
     private boolean removeVisible;
 

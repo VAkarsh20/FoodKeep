@@ -31,10 +31,13 @@ public class GroceryFragment extends Fragment {
 
     final int ADD_GROCERY_ITEM = 1;
     final int REMOVE_GROCERY_ITEM = 2;
+    final int SHOPPING_MODE = 3;
+    private boolean directAddPantry = true;
     ArrayList<GroceryItem> groceryList;
     GroceryListAdapter adapter;
     GroceryListener callback;
     FloatingActionButton fab;
+    FloatingActionButton fabShopping;
 
     public GroceryFragment() {
         // Required empty public constructor
@@ -77,6 +80,17 @@ public class GroceryFragment extends Fragment {
             }
         });
 
+        fabShopping = (FloatingActionButton) view.findViewById(R.id.shopButton);
+        fabShopping.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ShoppingModeActivity.class);
+                intent.putExtra("ItemList", groceryList);
+                intent.putExtra("DirectAddPantry", directAddPantry);
+                startActivityForResult(intent, SHOPPING_MODE);
+            }
+        });
+
         return view;
     }
 
@@ -109,13 +123,34 @@ public class GroceryFragment extends Fragment {
                 String itemName = data.getStringExtra("name");
 
                 int index = indexGroceryList(itemName);
-                GroceryItem item = groceryList.get(index);
+                //GroceryItem item = groceryList.get(index);
 
                 groceryList.remove(index);
                 adapter.notifyItemChanged(index);
                 adapter.notifyItemRangeRemoved(index, 1);
             }
+        } else if (requestCode == SHOPPING_MODE) {
+            if (resultCode == RESULT_OK) {
+                ArrayList<String> names = (ArrayList<String>) data.getSerializableExtra("NameList");
+                ArrayList<Integer> counts = (ArrayList<Integer>) data.getSerializableExtra("CountList");
+                ArrayList<Long> expiryDates = (ArrayList<Long>) data.getSerializableExtra("ExpiryDateList");
+
+                for (String name : names) {
+                    int index = indexGroceryList(name);
+                    groceryList.remove(index);
+                    adapter.notifyItemChanged(index);
+                    adapter.notifyItemRangeRemoved(index, 1);
+                }
+
+                if (directAddPantry) {
+                    callback.onPantryAdd(names, counts, expiryDates);
+                }
+            }
         }
+    }
+
+    public void setShoppingPantryAddSetting(boolean setting) {
+        directAddPantry = setting;
     }
 
     private int indexGroceryList(String name) {
@@ -144,7 +179,7 @@ public class GroceryFragment extends Fragment {
     }
 
     public interface GroceryListener {
-        public void onButtonClick();
+        public void onPantryAdd(ArrayList<String> names, ArrayList<Integer> counts, ArrayList<Long> expiryDates);
     }
 
     public void setGroceryListener(GroceryListener callback) {
@@ -153,6 +188,7 @@ public class GroceryFragment extends Fragment {
 
     public void enterRemoveMode() {
         fab.setVisibility(View.GONE);
+        fabShopping.setVisibility(View.GONE);
         for (GroceryItem item : groceryList) {
             item.flipRemoveVisibility();
         }
@@ -161,6 +197,7 @@ public class GroceryFragment extends Fragment {
 
     public void exitRemoveMode() {
         fab.setVisibility(View.VISIBLE);
+        fabShopping.setVisibility(View.VISIBLE);
         for (GroceryItem item : groceryList) {
             item.flipRemoveVisibility();
         }

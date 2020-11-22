@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodKeepProject">
-        <activity android:name=".ConsumeItemActivity"></activity>
+        <activity android:name=".PantryItemShoppingAddActivity"></activity>
+        <activity android:name=".ShoppingModeActivity" />
+        <activity android:name=".ConsumeItemActivity" />
         <activity android:name=".PantryItemAddActivity" />
-        <activity android:name=".GroceryItemAddActivity"></activity>
+        <activity android:name=".GroceryItemAddActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

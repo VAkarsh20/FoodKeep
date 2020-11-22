@@ -95,22 +95,12 @@ public class PantryFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ADD_PANTRY_ITEM) {
             if (resultCode == RESULT_OK) {
+                /*
                 String itemName = data.getStringExtra("name");
                 int itemCount = data.getIntExtra("count", 0);
                 Date expiryDate = new Date(data.getLongExtra("expiryDate", 0));
-
-                int index = indexPantryList(itemName);
-
-                RecyclerView pantryListView = (RecyclerView) getView().findViewById(R.id.pantryList);
-
-                if (index != -1) {
-                    pantryList.get(index).addCount(itemCount, expiryDate);
-                    adapter.notifyItemChanged(index);
-                } else {
-                    pantryList.add(0, new PantryItem(itemName, itemCount, expiryDate));
-                    adapter.notifyItemInserted(0);
-                    pantryListView.scrollToPosition(0);
-                }
+                */
+                addItem(data.getStringExtra("name"), data.getIntExtra("count", 0), data.getLongExtra("expiryDate", 0));
             }
         } else if (requestCode == CONSUME_PANTRY_ITEM) {
             if (resultCode == RESULT_OK) {
@@ -130,6 +120,24 @@ public class PantryFragment extends Fragment {
         }
     }
 
+    private void addItem(String itemName, int itemCount, long expiryDateLong) {
+        Date expiryDate = new Date(expiryDateLong);
+
+        int index = indexPantryList(itemName);
+
+        RecyclerView pantryListView = (RecyclerView) getView().findViewById(R.id.pantryList);
+
+        if (index != -1) {
+            pantryList.get(index).addCount(itemCount, expiryDate);
+            adapter.notifyItemChanged(index);
+        } else {
+            pantryList.add(0, new PantryItem(itemName, itemCount, expiryDate));
+            adapter.notifyItemInserted(0);
+            pantryListView.scrollToPosition(0);
+        }
+
+    }
+
     private int indexPantryList(String name) {
         for (int i = 0; i < pantryList.size(); i++) {
             if (pantryList.get(i).getName().equals(name)) {
@@ -145,6 +153,12 @@ public class PantryFragment extends Fragment {
         pantryList.remove(index);
         adapter.notifyItemChanged(index);
         adapter.notifyItemRangeRemoved(index, 1);
+    }
+
+    public void onGroceryPantryAdd(ArrayList<String> names, ArrayList<Integer> counts, ArrayList<Long> expiryDates) {
+        for (int i = 0; i < names.size(); i++) {
+            addItem(names.get(i), counts.get(i), expiryDates.get(i));
+        }
     }
 
     private void consumeItem(String name) {
