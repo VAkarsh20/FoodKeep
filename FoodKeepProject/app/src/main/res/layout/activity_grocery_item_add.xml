@@ -6,12 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".GroceryItemAddActivity">
 
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:theme="@style/HeaderContainer"
+        android:background="@color/colorPrimary"
+        >
+
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:theme="@style/HeaderText"
+            android:text="Add to Grocery"/>
+
+
+    </RelativeLayout>
+
     <AutoCompleteTextView
+        android:layout_margin="20dp"
         android:id="@+id/itemName"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:inputType="text"/>
+        app:layout_constraintTop_toBottomOf="@id/header"
+        android:theme="@style/searchBar"/>
+
+
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/numberPicker"
@@ -20,7 +43,14 @@
         app:layout_constraintTop_toBottomOf="@id/itemName"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:srcCompat="@drawable/banana_image">
+
+        </ImageView>
 
 <!--        <Button-->
 <!--            android:id="@+id/btnLess"-->
