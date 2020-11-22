@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,26 +43,31 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        SwitchMaterial shoppingAddPantrySwitch = (SwitchMaterial) view.findViewById(R.id.shoppingAddPantrySwitch);
+        shoppingAddPantrySwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (shoppingAddPantrySwitch.isChecked()) {
+                    callback.onSetShoppingPantryAddSetting(true);
+                } else {
+                    callback.onSetShoppingPantryAddSetting(false);
+                }
+            }
+        });
+
+
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        MainActivity mainActivity = (MainActivity) getActivity();
-        View view = getView();
-        ((TextView) view.findViewById(R.id.settings_count)).setText(Integer.toString(mainActivity.count));
-
-        Button button = view.findViewById(R.id.settings_button);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                callback.onButtonClick();
-            }
-        });
     }
 
     public interface SettingsListener {
-        public void onButtonClick();
+        public void onSetShoppingPantryAddSetting(boolean setting);
     }
 
     public void setSettingsListener(SettingsListener callback) {
@@ -68,6 +76,6 @@ public class SettingsFragment extends Fragment {
 
     public void updateCount(int count) {
         View view = getView();
-        ((TextView) view.findViewById(R.id.settings_count)).setText(Integer.toString(count));
+        //((TextView) view.findViewById(R.id.settings_count)).setText(Integer.toString(count));
     }
 }

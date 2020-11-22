@@ -35,10 +35,10 @@ public class GroceryItemAddActivity extends AppCompatActivity {
 
         if (nameString.equals("")) {
             setResult(RESULT_CANCELED);
-            finish();
+        } else {
+            resultIntent.putExtra("name", toTitleCase(nameString));
+            setResult(RESULT_OK, resultIntent);
         }
-        resultIntent.putExtra("name", toTitleCase(nameString));
-        setResult(RESULT_OK, resultIntent);
         finish();
     }
 

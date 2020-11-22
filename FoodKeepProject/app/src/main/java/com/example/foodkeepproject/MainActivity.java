@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+
 import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity implements GroceryFragment.GroceryListener, PantryFragment.PantryListener, SettingsFragment.SettingsListener {
@@ -158,5 +160,15 @@ public class MainActivity extends AppCompatActivity implements GroceryFragment.G
         groceryFragment.updateCount(count);
         pantryFragment.updateCount(count);
         settingsFragment.updateCount(count);
+    }
+
+    @Override
+    public void onPantryAdd(ArrayList<String> names, ArrayList<Integer> counts, ArrayList<Long> expiryDates) {
+        pantryFragment.onGroceryPantryAdd(names, counts, expiryDates);
+    }
+
+    @Override
+    public void onSetShoppingPantryAddSetting(boolean setting) {
+        groceryFragment.setShoppingPantryAddSetting(setting);
     }
 }
