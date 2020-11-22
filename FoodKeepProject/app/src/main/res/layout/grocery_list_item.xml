@@ -10,34 +10,20 @@
     android:paddingEnd="10dp" >
 
     <TextView
-        android:id="@+id/pantryItemName"
+        android:id="@+id/groceryItemName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/groceryItemCount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/pantryNextExpiry"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-        <TextView
-            android:id="@+id/pantryItemCount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
+        android:layout_weight="1"/>
 
     <Button
-        android:id="@+id/itemConsume"
-        android:text="Consume"
+        android:id="@+id/itemRemove"
+        android:text="Remove"
         android:textAllCaps="false"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

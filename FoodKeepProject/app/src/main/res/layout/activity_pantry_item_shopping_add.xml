@@ -4,37 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PantryItemAddActivity">
+    tools:context=".PantryItemShoppingAddActivity">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:theme="@style/HeaderContainer"
-        android:background="@color/colorPrimary"
-        >
+        android:background="@color/purple_500">
 
         <TextView
             android:id="@+id/headerTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:theme="@style/HeaderText"
-            android:text="Add to Pantry"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:text="Add to Pantry" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </RelativeLayout>
-
-
-    <AutoCompleteTextView
-        android:layout_margin="20dp"
+    <TextView
         android:id="@+id/itemName"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         app:layout_constraintTop_toBottomOf="@id/header"
-        android:theme="@style/searchBar"/>
-
+        android:inputType="text"/>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/numberPicker"
@@ -43,8 +44,7 @@
         app:layout_constraintTop_toBottomOf="@id/itemName"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:orientation="horizontal"
-        android:layout_marginTop="200dp">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnLess"
@@ -74,7 +74,6 @@
     </LinearLayout>
 
     <com.google.android.material.slider.Slider
-        android:layout_marginTop="50dp"
         android:id="@+id/freshnessSlider"
         app:layout_constraintTop_toBottomOf="@id/numberPicker"
         android:layout_height="wrap_content"
@@ -88,39 +87,15 @@
         android:id="@+id/datePicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/freshnessSlider" />
 
-
-
-    <RelativeLayout
+    <Button
+        android:text="Confirm"
+        android:textAllCaps="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/datePicker"
-        android:paddingTop="50dp"
-        android:paddingStart="100dp"
-        android:paddingEnd="100dp">
-    <Button
-        android:id="@+id/confirm_button"
-        android:text="Save"
-        android:textAllCaps="false"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="confirmAdd"
-        android:layout_margin="5dp"/>
-        <Button
-            android:id="@+id/cancel_button"
-            android:text="Cancel"
-            android:textAllCaps="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="confirmAdd"
-            android:layout_toEndOf="@+id/confirm_button"
-            android:layout_margin="5dp"
-            android:backgroundTint="@color/colorAccent"
-            />
-    </RelativeLayout>
+        android:onClick="confirmAdd" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,27 +5,32 @@
     android:layout_height="match_parent"
     tools:context=".GroceryFragment">
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/groceryList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
-        <TextView
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:orientation="vertical">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/shopButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Grocery" />
-        <TextView
-            android:id="@+id/grocery_count"
+            android:src="@drawable/ic_shopping"
+            android:layout_margin="16dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="" />
-        <Button
-            android:id="@+id/grocery_button"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Click" />
+            android:src="@drawable/ic_add"
+            android:layout_margin="16dp" />
+
+
     </LinearLayout>
 
 </FrameLayout>

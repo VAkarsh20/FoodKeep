@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GroceryItemAddActivity">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:theme="@style/HeaderContainer"
+        android:background="@color/colorPrimary"
+        >
+
+        <TextView
+            android:id="@+id/headerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:theme="@style/HeaderText"
+            android:text="Add to Grocery"/>
+
+
+    </RelativeLayout>
+
+    <AutoCompleteTextView
+        android:layout_margin="20dp"
+        android:id="@+id/itemName"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        android:theme="@style/searchBar"/>
+
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/numberPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/itemName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:orientation="vertical">
+
+
+
+
+<!--        <Button-->
+<!--            android:id="@+id/btnLess"-->
+<!--            android:layout_width="0sp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="-"-->
+<!--            android:onClick="decrement" />-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/pickerNumber"-->
+<!--            android:layout_width="0sp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:textAlignment="center"-->
+<!--            android:inputType="number"-->
+<!--            android:digits="0123456789"-->
+<!--            android:text="0" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btnMore"-->
+<!--            android:layout_width="0sp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="+"-->
+<!--            android:onClick="increment" />-->
+    </LinearLayout>
+
+    <Button
+        android:text="Confirm"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/numberPicker"
+        android:onClick="confirmAdd" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
