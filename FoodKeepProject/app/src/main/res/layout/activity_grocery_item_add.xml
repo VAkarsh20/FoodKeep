@@ -16,7 +16,7 @@
         >
 
         <TextView
-            android:id="@+id/header"
+            android:id="@+id/headerTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -45,12 +45,8 @@
         app:layout_constraintRight_toRightOf="parent"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:srcCompat="@drawable/banana_image">
 
-        </ImageView>
+
 
 <!--        <Button-->
 <!--            android:id="@+id/btnLess"-->
