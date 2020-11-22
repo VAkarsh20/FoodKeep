@@ -26,7 +26,7 @@
     </style>
 
     <style name="searchBar">
-        <item name="android:background">"@drawable/search_border"</item>
+        <item name="android:background">@color/colorPrimary</item>
         <item name="android:padding">10dp</item>
         <item name="android:inputType">text</item>
         <item name="android:layout_margin">20dp</item>
