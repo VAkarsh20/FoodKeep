@@ -87,11 +87,43 @@
             app:tint="#03A678"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="fill_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/numberPicker"
+        android:id="@+id/sliderText"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Looks Fresh"
+            android:layout_weight="1"
+            android:textSize="14sp"/>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Going Bad"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
     <com.google.android.material.slider.Slider
-        android:layout_marginTop="50dp"
+
         android:layout_marginHorizontal="16dp"
         android:id="@+id/freshnessSlider"
-        app:layout_constraintTop_toBottomOf="@id/numberPicker"
+        app:layout_constraintTop_toBottomOf="@id/sliderText"
         android:layout_height="wrap_content"
         app:labelBehavior="gone"
         android:layout_width="match_parent"
@@ -125,6 +157,8 @@
         android:layout_marginRight="30dp"
         android:paddingLeft="70dp"
         android:paddingRight="70dp"/> -->
+
+    <!-- Getting rid of the expiry date for clarity for users since they can't change it
     <TextView
         android:id="@+id/datePicker"
         android:layout_width="match_parent"
@@ -140,13 +174,14 @@
         android:paddingEnd="100dp"
         android:textAlignment="center"
         app:drawableStartCompat="@drawable/ic_baseline_calendar_today_24" />
+        -->
 
     <Button
         android:text="Confirm"
         android:textAllCaps="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/datePicker"
+        app:layout_constraintTop_toBottomOf="@id/freshnessSlider"
         android:onClick="confirmAdd"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"

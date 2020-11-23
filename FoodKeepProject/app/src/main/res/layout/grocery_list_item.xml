@@ -3,36 +3,42 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="72dp"
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp" >
+    android:paddingHorizontal="16dp"
+    android:gravity="center_horizontal">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="vertical"
-        android:layout_weight="6">
+        android:layout_marginRight="16dp"
+        android:layout_weight="6"
+        android:gravity="left|center_vertical"
+        android:orientation="vertical">
+
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="10dp" />
 
         <TextView
             android:id="@+id/groceryItemName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
 
+        <!-- Future Implementation for "# in pantry" under the item name
         <TextView
             android:id="@+id/groceryItemCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"/>
-
+            android:textSize="14sp"/> -->
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="10dp" />
 
     </LinearLayout>
-
-
 
     <Button
         android:id="@+id/itemRemove"
