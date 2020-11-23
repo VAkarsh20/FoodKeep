@@ -3,13 +3,13 @@
     <item
         android:id="@+id/pantry"
         android:title="Pantry"
-        android:icon="@drawable/ic_pantry"/>
+        android:icon="@drawable/ic_baseline_kitchen_24"/>
     <item
         android:id="@+id/grocery"
         android:title="Grocery"
-        android:icon="@drawable/ic_grocery"/>
+        android:icon="@drawable/ic_baseline_local_grocery_store_24"/>
     <item
         android:id="@+id/settings"
         android:title="Settings"
-        android:icon="@drawable/ic_settings"/>
+        android:icon="@drawable/ic_baseline_settings_24"/>
 </menu>

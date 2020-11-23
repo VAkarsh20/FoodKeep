@@ -9,9 +9,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/purple_500">
+        android:background="@color/colorPrimary">
 
         <TextView
             android:id="@+id/headerTitle"
@@ -20,24 +20,27 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintTop_toBottomOf="@id/header"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:layout_marginStart="16dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
             android:textColor="@color/white"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:text="Pantry" />
 
+        <!-- More button layout - margins are a bit funky due to button's original size -->
         <ImageButton
             android:id="@+id/pantryEnterConsume"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_consume"
+            android:src="@drawable/ic_baseline_more_vert_24"
             app:layout_constraintEnd_toEndOf="@id/header"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="5dp"
             android:layout_marginTop="5dp"
-            android:onClick="onPantryEnterConsumeClick"/>
+            android:onClick="onPantryEnterConsumeClick"
+            android:backgroundTint="@color/colorPrimary"
+            app:tint="#FFFFFF"/>
 
         <ImageButton
             android:id="@+id/pantryExitConsume"
@@ -93,6 +96,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
         app:menu="@menu/bottom_nav_menu"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
