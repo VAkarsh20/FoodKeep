@@ -8,11 +8,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal">
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/shoppingAddPantrySwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
             android:checked="true"/>
         <TextView
             android:layout_width="0dp"
