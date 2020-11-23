@@ -99,6 +99,7 @@
         android:valueTo="3.0"
         android:stepSize="1.0" />
 
+    <!--
     <TextView
         android:id="@+id/datePicker"
         android:layout_width="match_parent"
@@ -107,7 +108,7 @@
         app:layout_constraintTop_toBottomOf="@id/freshnessSlider"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"/>
+        android:layout_marginRight="30dp"/>-->
 
     <!--
     <TextView
@@ -124,6 +125,21 @@
         android:layout_marginRight="30dp"
         android:paddingLeft="70dp"
         android:paddingRight="70dp"/> -->
+    <TextView
+        android:id="@+id/datePicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/freshnessSlider"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:paddingStart="100dp"
+        android:paddingEnd="100dp"
+        android:textAlignment="center"
+        app:drawableStartCompat="@drawable/ic_baseline_calendar_today_24" />
 
     <Button
         android:text="Confirm"
