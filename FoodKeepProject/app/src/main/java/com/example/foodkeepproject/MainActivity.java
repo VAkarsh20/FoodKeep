@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements GroceryFragment.G
                         case R.id.grocery:
                             fm.beginTransaction().hide(active).show(groceryFragment).commit();
                             active = groceryFragment;
-                            headerText.setText("Grocery List");
+                            headerText.setText("Grocery");
 
                             if (removeMode) {
                                 groceryExitRemove.setVisibility(View.VISIBLE);

@@ -25,10 +25,10 @@
             android:layout_marginBottom="16dp"
             android:layout_marginTop="16dp"
             android:textColor="@color/white"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:text="Pantry" />
 
-        <!-- More button layout - margins are a bit funky due to button's original size -->
+        <!-- More (three dots) button layout - margins are a bit funky due to button's original size -->
         <ImageButton
             android:id="@+id/pantryEnterConsume"
             android:layout_width="wrap_content"
@@ -58,13 +58,15 @@
             android:id="@+id/groceryEnterRemove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_consume"
+            android:src="@drawable/ic_baseline_more_vert_24"
             app:layout_constraintEnd_toEndOf="@id/header"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="5dp"
             android:layout_marginTop="5dp"
             android:visibility="gone"
-            android:onClick="onGroceryEnterRemoveClick"/>
+            android:onClick="onGroceryEnterRemoveClick"
+            android:backgroundTint="@color/colorPrimary"
+            app:tint="#FFFFFF"/>
 
         <ImageButton
             android:id="@+id/groceryExitRemove"

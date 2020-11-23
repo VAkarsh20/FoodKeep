@@ -8,13 +8,13 @@
         <!-- Status bar color. -->
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/white</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorSecondary</item>
     </style>
 
     <style name="HeaderContainer" parent="@android:style/Widget">
         <item name="android:padding">10dp</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">56dp</item>
         <item name="background">@color/colorPrimary</item>
     </style>
 
@@ -33,6 +33,6 @@
     </style>
 
     <style name="Button.Grey" parent="TextAppearance.AppCompat.Widget.Button">
-        <item name="background">@color/colorAccent</item>
+        <item name="android:backgroundTint">#D9D9D9</item>
     </style>
 </resources>

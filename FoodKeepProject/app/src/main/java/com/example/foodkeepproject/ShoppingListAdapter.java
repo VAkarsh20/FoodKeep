@@ -39,7 +39,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         private View.OnClickListener checkButtonListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemListener.onClickCheck(itemName.getText().toString(), checkButton.getBackgroundTintList().equals(ColorStateList.valueOf(Color.GREEN)));
+                itemListener.onClickCheck(itemName.getText().toString(), checkButton.getBackgroundTintList().equals(ColorStateList.valueOf(Color.rgb(3,166,120))));
             }
         };
     }
@@ -70,9 +70,9 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         ImageButton button = holder.checkButton;
 
         if (item.getRemoveVisibility()) {
-            button.setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
+            button.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(3,166,120)));
         } else {
-            button.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+            button.setBackgroundTintList(ColorStateList.valueOf(Color.LTGRAY));
         }
 
     }

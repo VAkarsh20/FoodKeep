@@ -15,7 +15,7 @@ import java.util.List;
 
 public class PantryListAdapter extends RecyclerView.Adapter<PantryListAdapter.ViewHolder> {
 
-    private List<PantryItem> pantryItems;
+    public List<PantryItem> pantryItems;
     private PantryItemClickListener itemListener;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -73,7 +73,8 @@ public class PantryListAdapter extends RecyclerView.Adapter<PantryListAdapter.Vi
         textView = holder.nextExpiry;
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         String strDate = dateFormat.format(item.getEarliestExpiry());
-        textView.setText(item.getEarliestExpiryAmount() + " will expire on " + strDate);
+        //textView.setText(item.getEarliestExpiryAmount() + " will expire on " + strDate); Original
+        textView.setText("Expiry: " + strDate);
 
         Button button = holder.consumeButton;
         if (item.getConsumeVisibility()) {

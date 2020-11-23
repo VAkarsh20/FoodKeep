@@ -6,34 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".PantryItemAddActivity">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:theme="@style/HeaderContainer"
-        android:background="@color/colorPrimary"
-        >
+        android:background="@color/colorPrimary">
 
         <TextView
             android:id="@+id/headerTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:theme="@style/HeaderText"
-            android:text="Add to Pantry"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:text="Add to Pantry" />
 
-
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <AutoCompleteTextView
-        android:layout_margin="20dp"
+        android:layout_marginTop="30dp"
+        android:padding="16dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:id="@+id/itemName"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         app:layout_constraintTop_toBottomOf="@id/header"
-        android:theme="@style/searchBar"/>
+        android:background="@drawable/button_outline_primary_color"
+        android:hint="Item Name"/>
 
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -44,15 +52,22 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:orientation="horizontal"
-        android:layout_marginTop="200dp">
+        android:layout_marginTop="200dp"
+        android:gravity="center">
 
-        <Button
+
+        <ImageButton
             android:id="@+id/btnLess"
-            android:layout_width="0sp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="-"
-            android:onClick="decrement" />
+            android:onClick="decrement"
+            android:src="@drawable/ic_baseline_remove_24"
+            android:background="@drawable/button_outline_primary_color"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
+            android:paddingVertical="10dp"
+            app:tint="#03A678"/>
 
         <EditText
             android:id="@+id/pickerNumber"
@@ -64,17 +79,23 @@
             android:digits="0123456789"
             android:text="0" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btnMore"
-            android:layout_width="0sp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="+"
-            android:onClick="increment" />
+            android:onClick="increment"
+            android:src="@drawable/ic_baseline_add_24"
+            android:background="@drawable/button_outline_primary_color"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
+            android:paddingVertical="10dp"
+            app:tint="#03A678"/>
     </LinearLayout>
 
     <com.google.android.material.slider.Slider
         android:layout_marginTop="50dp"
+        android:layout_marginHorizontal="16dp"
         android:id="@+id/freshnessSlider"
         app:layout_constraintTop_toBottomOf="@id/numberPicker"
         android:layout_height="wrap_content"
@@ -90,37 +111,42 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/freshnessSlider" />
-
-
+        android:layout_gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/freshnessSlider"
+        android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:paddingLeft="70dp"
+        android:paddingRight="70dp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/datePicker"
-        android:paddingTop="50dp"
-        android:paddingStart="100dp"
-        android:paddingEnd="100dp">
+        android:layout_marginTop="30dp"
+        android:gravity="center">
     <Button
         android:id="@+id/confirm_button"
         android:text="Save"
-        android:textAllCaps="false"
+        android:textAllCaps="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="confirmAdd"
         android:layout_margin="5dp"/>
+
         <Button
             android:id="@+id/cancel_button"
             android:text="Cancel"
-            android:textAllCaps="false"
+            android:textAllCaps="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="confirmAdd"
             android:layout_toEndOf="@+id/confirm_button"
             android:layout_margin="5dp"
-            android:backgroundTint="@color/colorAccent"
-            />
+            android:textColor="@color/colorPrimary"
+            android:backgroundTint="@color/white"
+            style="?android:attr/borderlessButtonStyle"/>
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

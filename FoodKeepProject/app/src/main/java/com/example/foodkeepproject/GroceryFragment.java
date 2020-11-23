@@ -1,6 +1,8 @@
 package com.example.foodkeepproject;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -81,6 +83,7 @@ public class GroceryFragment extends Fragment {
         });
 
         fabShopping = (FloatingActionButton) view.findViewById(R.id.shopButton);
+        fabShopping.setBackgroundTintList(ColorStateList.valueOf(Color.LTGRAY));
         fabShopping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
