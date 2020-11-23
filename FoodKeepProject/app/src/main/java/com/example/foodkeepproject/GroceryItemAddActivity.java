@@ -9,6 +9,8 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.switchmaterial.SwitchMaterial;
+
 public class GroceryItemAddActivity extends AppCompatActivity {
 
     private static final String[] PRODUCE = new String[] {
@@ -29,6 +31,7 @@ public class GroceryItemAddActivity extends AppCompatActivity {
     public void confirmAdd(View view) {
         AutoCompleteTextView name = (AutoCompleteTextView) findViewById(R.id.itemName);
         EditText count = (EditText) findViewById(R.id.pickerNumber);
+        SwitchMaterial switchMaterial = (SwitchMaterial) findViewById(R.id.favoritesSwitch);
         Intent resultIntent = new Intent();
 
         String nameString = name.getText().toString();
@@ -37,8 +40,14 @@ public class GroceryItemAddActivity extends AppCompatActivity {
             setResult(RESULT_CANCELED);
         } else {
             resultIntent.putExtra("name", toTitleCase(nameString));
+            resultIntent.putExtra("favorite", switchMaterial.isChecked());
             setResult(RESULT_OK, resultIntent);
         }
+        finish();
+    }
+
+    public void cancel(View view) {
+        setResult(RESULT_CANCELED);
         finish();
     }
 

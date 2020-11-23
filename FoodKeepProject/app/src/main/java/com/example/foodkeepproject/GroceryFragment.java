@@ -20,6 +20,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 
 import static android.app.Activity.RESULT_OK;
@@ -64,8 +65,9 @@ public class GroceryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_grocery, container, false);
 
         groceryList = new ArrayList<>();
-        groceryList.add(new GroceryItem("Apple"));
-        groceryList.add(new GroceryItem("Banana"));
+        groceryList.add(new GroceryItem("Apple", true));
+        groceryList.add(new GroceryItem("Banana", false));
+        Collections.sort(groceryList);
         GroceryItemClickListener listener = this::removeItem; // TODO
 
         RecyclerView groceryItemsList = (RecyclerView) view.findViewById(R.id.groceryList);
@@ -109,6 +111,7 @@ public class GroceryFragment extends Fragment {
         if (requestCode == ADD_GROCERY_ITEM) {
             if (resultCode == RESULT_OK) {
                 String itemName = data.getStringExtra("name");
+                boolean favorite = data.getBooleanExtra("favorite", false);
                 int index = indexGroceryList(itemName);
 
                 RecyclerView groceryListView = (RecyclerView) getView().findViewById(R.id.groceryList);
@@ -116,10 +119,14 @@ public class GroceryFragment extends Fragment {
                 if (index != -1) {
                     adapter.notifyItemChanged(index);
                 } else {
-                    groceryList.add(0, new GroceryItem(itemName));
-                    adapter.notifyItemInserted(0);
-                    groceryListView.scrollToPosition(0);
+                    groceryList.add(0, new GroceryItem(itemName, favorite));
+                    //adapter.notifyItemInserted(0);
+                    //groceryListView.scrollToPosition(0);
                 }
+
+                Collections.sort(groceryList);
+                adapter.notifyItemRangeChanged(0, groceryList.size());
+                groceryListView.scrollToPosition(0);
             }
         } else if (requestCode == REMOVE_GROCERY_ITEM) {
             if (resultCode == RESULT_OK) {
@@ -140,9 +147,11 @@ public class GroceryFragment extends Fragment {
 
                 for (String name : names) {
                     int index = indexGroceryList(name);
-                    groceryList.remove(index);
-                    adapter.notifyItemChanged(index);
-                    adapter.notifyItemRangeRemoved(index, 1);
+                    if (!groceryList.get(index).getRecurring()) {
+                        groceryList.remove(index);
+                        adapter.notifyItemChanged(index);
+                        adapter.notifyItemRangeRemoved(index, 1);
+                    }
                 }
 
                 if (directAddPantry) {

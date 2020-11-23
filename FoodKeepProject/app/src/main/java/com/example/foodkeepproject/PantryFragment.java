@@ -21,6 +21,8 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -63,8 +65,10 @@ public class PantryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_pantry, container, false);
 
         pantryList = new ArrayList<>();
-        pantryList.add(new PantryItem("Apple", 5, new GregorianCalendar(2020, Calendar.NOVEMBER, 22).getTime()));
-        pantryList.add(new PantryItem("Banana", 4, new GregorianCalendar(2020, Calendar.NOVEMBER, 22).getTime()));
+        pantryList.add(new PantryItem("Apple", 5, new GregorianCalendar(2020, Calendar.NOVEMBER, 25).getTime()));
+        pantryList.add(new PantryItem("Banana", 4, new GregorianCalendar(2020, Calendar.NOVEMBER, 10).getTime()));
+
+        Collections.sort(pantryList);
 
         PantryItemClickListener listener = this::consumeItem;
 
@@ -133,9 +137,11 @@ public class PantryFragment extends Fragment {
         } else {
             pantryList.add(0, new PantryItem(itemName, itemCount, expiryDate));
             adapter.notifyItemInserted(0);
-            pantryListView.scrollToPosition(0);
         }
 
+        Collections.sort(pantryList);
+        adapter.notifyItemRangeChanged(0, pantryList.size());
+        pantryListView.scrollToPosition(0);
     }
 
     private int indexPantryList(String name) {

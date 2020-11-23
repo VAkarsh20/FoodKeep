@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
-public class PantryItem {
+public class PantryItem implements Comparable {
     private String name;
     private int count;
     private boolean consumeVisible;
@@ -36,6 +36,18 @@ public class PantryItem {
             expiryDates.add(expiryDate);
             Collections.sort(expiryDates);
             earliestExpiry = expiryDates.get(0);
+        }
+    }
+
+    @Override
+    public int compareTo(Object other) {
+        Date otherExpiry = ((PantryItem) other).getEarliestExpiry();
+        if (earliestExpiry.before(otherExpiry)) {
+            return -1;
+        } else if (otherExpiry.before(earliestExpiry)) {
+            return 1;
+        } else {
+            return 0;
         }
     }
 

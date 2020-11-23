@@ -1,6 +1,7 @@
 package com.example.foodkeepproject;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class PantryListAdapter extends RecyclerView.Adapter<PantryListAdapter.ViewHolder> {
@@ -63,6 +66,8 @@ public class PantryListAdapter extends RecyclerView.Adapter<PantryListAdapter.Vi
 
     @Override
     public void onBindViewHolder(PantryListAdapter.ViewHolder holder, int position) {
+
+        Calendar thresholdDate = Calendar.getInstance();
         PantryItem item = pantryItems.get(position);
 
         TextView textView = holder.itemName;
@@ -74,7 +79,19 @@ public class PantryListAdapter extends RecyclerView.Adapter<PantryListAdapter.Vi
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         String strDate = dateFormat.format(item.getEarliestExpiry());
         //textView.setText(item.getEarliestExpiryAmount() + " will expire on " + strDate); Original
-        textView.setText("Expiry: " + strDate);
+        textView.setText("Expiry: " + strDate + " (" + item.getEarliestExpiryAmount() + ")");
+
+        thresholdDate.add(Calendar.DATE, 1);
+        if (item.getEarliestExpiry().before(thresholdDate.getTime())) {
+            textView.setTextColor(Color.RED);
+        } else {
+            thresholdDate.add(Calendar.DATE, 5);
+            /*
+            if (item.getEarliestExpiry().before(thresholdDate.getTime())) {
+                textView.setTextColor(Color.);
+            }
+             */
+        }
 
         Button button = holder.consumeButton;
         if (item.getConsumeVisibility()) {

@@ -124,6 +124,11 @@ public class PantryItemAddActivity extends AppCompatActivity {
         finish();
     }
 
+    public void cancel(View view) {
+        setResult(RESULT_CANCELED);
+        finish();
+    }
+
     public static String toTitleCase(String givenString) {
         String[] arr = givenString.split(" ");
         StringBuffer sb = new StringBuffer();
