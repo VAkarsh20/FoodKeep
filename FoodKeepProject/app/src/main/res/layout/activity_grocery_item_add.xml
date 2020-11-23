@@ -37,15 +37,23 @@
 
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/numberPicker"
+        android:id="@+id/switchContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/itemName"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_margin="20dp">
 
 
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/shoppingAddPantrySwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:useMaterialThemeColors="true"/>
 
 
 <!--        <Button-->
@@ -75,12 +83,34 @@
 <!--            android:onClick="increment" />-->
     </LinearLayout>
 
-    <Button
-        android:text="Confirm"
-        android:textAllCaps="false"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/numberPicker"
-        android:onClick="confirmAdd" />
+        app:layout_constraintTop_toBottomOf="@id/switchContainer"
+        android:paddingTop="50dp"
+        android:paddingStart="100dp"
+        android:paddingEnd="100dp">
+        <Button
+            android:id="@+id/confirm_button"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="confirmAdd"
+            android:layout_margin="5dp"/>
+        <Button
+            android:id="@+id/cancel_button"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="confirmAdd"
+            android:layout_toEndOf="@+id/confirm_button"
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/colorAccent"
+            />
+    </RelativeLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
