@@ -31,10 +31,10 @@ public class PantryItemShoppingAddActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.itemName);
         textView.setText(getIntent().getStringExtra("name"));
 
-        TextView date = (TextView) findViewById(R.id.datePicker);
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        String strDate = dateFormat.format(calendar.getTime());
-        date.setText(strDate);
+        //TextView date = (TextView) findViewById(R.id.datePicker);
+        //DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        //String strDate = dateFormat.format(calendar.getTime());
+        //date.setText(strDate);
     }
 
     public void increment(View view) {
