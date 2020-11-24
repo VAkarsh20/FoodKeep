@@ -83,7 +83,7 @@ public class PantryListAdapter extends RecyclerView.Adapter<PantryListAdapter.Vi
 
         thresholdDate.add(Calendar.DATE, 1);
         if (item.getEarliestExpiry().before(thresholdDate.getTime())) {
-            textView.setTextColor(Color.RED);
+            textView.setTextColor(Color.rgb(206, 18,24));
         } else {
             thresholdDate.add(Calendar.DATE, 5);
             /*
