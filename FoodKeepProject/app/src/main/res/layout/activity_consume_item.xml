@@ -98,16 +98,31 @@
             app:tint="#03A678"/>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:onClick="confirmConsume"
-        android:text="Confirm"
-        android:textAllCaps="true"
-        android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/numberPicker"
-        android:layout_marginTop="30dp"/>
+        android:gravity="center"
+        android:layout_marginTop="30dp">
+        <Button
+            android:id="@+id/confirm_button"
+            android:text="Confirm"
+            android:textAllCaps="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="confirmConsume"
+            android:layout_margin="5dp"/>
+        <Button
+            android:id="@+id/cancel_button"
+            android:text="Cancel"
+            android:textAllCaps="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="cancel"
+            android:layout_toEndOf="@+id/confirm_button"
+            android:layout_margin="5dp"
+            android:textColor="@color/colorPrimary"
+            android:backgroundTint="@color/white"
+            style="?android:attr/borderlessButtonStyle"/>
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

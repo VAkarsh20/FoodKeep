@@ -59,4 +59,9 @@ public class ConsumeItemActivity extends AppCompatActivity {
         setResult(RESULT_OK, resultIntent);
         finish();
     }
+
+    public void cancel(View view) {
+        setResult(RESULT_CANCELED);
+        finish();
+    }
 }
